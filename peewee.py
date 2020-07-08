@@ -4550,6 +4550,13 @@ class Field(ColumnBase):
             accum.extend(self.constraints)
         if self.collation:
             accum.append(SQL('COLLATE %s' % self.collation))
+        if self.default is not None:
+            if type(self.default) in (int, float):
+                accum.append(SQL('DEFAULT %s' % self.default))
+            else:
+                accum.append(SQL("DEFAULT '%s'" % self.default))
+        if self.help_text:
+            accum.append(SQL('COMMENT "%s"' % self.comment))
         return NodeList(accum)
 
 
