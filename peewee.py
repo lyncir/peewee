@@ -4556,7 +4556,7 @@ class Field(ColumnBase):
             else:
                 accum.append(SQL("DEFAULT '%s'" % self.default))
         if self.help_text:
-            accum.append(SQL('COMMENT "%s"' % self.comment))
+            accum.append(SQL('COMMENT "%s"' % self.help_text))
         return NodeList(accum)
 
 
